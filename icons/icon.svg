@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Life Plan app icon">
+  <rect width="512" height="512" rx="96" fill="#2f6f5e"/>
+  <path d="M106 337c38-77 87-125 147-143 64-19 116-3 153 20-34 7-66 22-95 45-38 30-67 70-87 119-36-13-75-27-118-41Z" fill="#f7f5ef"/>
+  <path d="M122 144h268v42H122zM122 234h104v42H122zM270 234h120v42H270zM122 324h76v42h-76z" fill="#d9ded7"/>
+  <circle cx="390" cy="348" r="38" fill="#ba7b2f"/>
+</svg>
