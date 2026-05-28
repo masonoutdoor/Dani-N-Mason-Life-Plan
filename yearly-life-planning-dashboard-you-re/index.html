@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2f6f5e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Life Plan" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Life Plan" />
+    <title>Yearly Life Planning Dashboard</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-label="Year overview">
+        <div>
+          <p class="eyebrow">Foundation while enjoying life</p>
+          <h1>Yearly Life Planning Dashboard</h1>
+        </div>
+        <div class="theme-box">
+          <span>Year Theme</span>
+          <input id="theme" type="text" value="Build the Foundation While Still Enjoying Life" />
+        </div>
+      </section>
+
+      <section class="install-strip" id="installStrip" aria-label="Install dashboard">
+        <div>
+          <strong>Install on your phone</strong>
+          <span id="installHelp">Use your browser menu and choose Add to Home Screen.</span>
+        </div>
+        <button id="installBtn" type="button" hidden>Install</button>
+      </section>
+
+      <section class="summary-grid" aria-label="Dashboard summary">
+        <article class="metric">
+          <span>Monthly Take-Home</span>
+          <strong id="monthlyIncomeOut">$6,500</strong>
+          <small>Combined income after taxes</small>
+        </article>
+        <article class="metric">
+          <span>Emergency Fund</span>
+          <strong id="emergencyOut">$3,000</strong>
+          <small id="emergencyMonthsOut">0.9 months covered</small>
+        </article>
+        <article class="metric">
+          <span>Debt Payoff</span>
+          <strong id="debtOut">$18,000</strong>
+          <small id="debtMonthsOut">28 months at current pace</small>
+        </article>
+        <article class="metric">
+          <span>Travel Fund</span>
+          <strong id="travelOut">$7,800</strong>
+          <small>Estimated yearly vacation budget</small>
+        </article>
+      </section>
+
+      <section class="planner-layout">
+        <aside class="control-panel" aria-label="Planning inputs">
+          <div class="panel-head">
+            <h2>Inputs</h2>
+            <button id="resetBtn" type="button" aria-label="Reset dashboard">Reset</button>
+          </div>
+
+          <label>
+            Combined monthly take-home
+            <input id="monthlyIncome" type="number" min="0" step="100" value="6500" />
+          </label>
+
+          <label>
+            Monthly living expenses
+            <input id="livingExpenses" type="number" min="0" step="100" value="3500" />
+          </label>
+
+          <label>
+            Current savings
+            <input id="currentSavings" type="number" min="0" step="100" value="3000" />
+          </label>
+
+          <label>
+            Current debt balance
+            <input id="debtBalance" type="number" min="0" step="100" value="18000" />
+          </label>
+
+          <label>
+            Monthly debt payoff
+            <input id="debtPayment" type="number" min="0" step="50" value="650" />
+          </label>
+
+          <label>
+            Weekly vacation transfer
+            <input id="weeklyVacation" type="number" min="0" step="25" value="150" />
+          </label>
+
+          <label>
+            Monthly investing
+            <input id="monthlyInvesting" type="number" min="0" step="25" value="300" />
+          </label>
+
+          <label>
+            House down payment target
+            <input id="houseTarget" type="number" min="0" step="1000" value="30000" />
+          </label>
+        </aside>
+
+        <section class="workbench" aria-label="Planning workbench">
+          <section class="band">
+            <div class="section-title">
+              <p class="eyebrow">Budget Structure</p>
+              <h2>Where the money is aimed</h2>
+            </div>
+            <div class="budget-bars" id="budgetBars"></div>
+          </section>
+
+          <section class="split">
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Emergency Fund</p>
+                <h2>Stability first</h2>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label">
+                  <span>Starter fund</span>
+                  <strong id="starterProgressText">100%</strong>
+                </div>
+                <div class="progress"><span id="starterProgress"></span></div>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label">
+                  <span>3 month fund</span>
+                  <strong id="threeMonthProgressText">29%</strong>
+                </div>
+                <div class="progress"><span id="threeMonthProgress"></span></div>
+              </div>
+              <p id="emergencyGuidance" class="guidance"></p>
+            </article>
+
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Debt Strategy</p>
+                <h2>Highest interest first</h2>
+              </div>
+              <div class="big-number" id="debtFreeDate">Debt-free: Sep 2028</div>
+              <p class="guidance" id="debtGuidance"></p>
+              <div class="priority-list">
+                <span>1. Credit cards</span>
+                <span>2. Personal loans</span>
+                <span>3. Car loans</span>
+                <span>4. Student loans</span>
+              </div>
+            </article>
+          </section>
+
+          <section class="split">
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Vacation System</p>
+                <h2>Memories with a plan</h2>
+              </div>
+              <div class="trip-grid">
+                <label>
+                  Big trip budget
+                  <input id="bigTrip" type="number" min="0" step="100" value="4000" />
+                </label>
+                <label>
+                  Small trips budget
+                  <input id="smallTrips" type="number" min="0" step="100" value="2200" />
+                </label>
+                <label>
+                  Mini experiences
+                  <input id="miniTrips" type="number" min="0" step="50" value="1200" />
+                </label>
+              </div>
+              <p class="guidance" id="travelGuidance"></p>
+            </article>
+
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Investing</p>
+                <h2>Future building</h2>
+              </div>
+              <div class="big-number" id="investmentOut">$18,900 in 5 years</div>
+              <p class="guidance">Priority order: employer match, Roth IRA, then brokerage. This estimate assumes steady monthly investing and a simple 7% annual return.</p>
+            </article>
+          </section>
+
+          <section class="band">
+            <div class="section-title">
+              <p class="eyebrow">Annual Timeline</p>
+              <h2>Quarter-by-quarter focus</h2>
+            </div>
+            <div class="quarters">
+              <article>
+                <h3>Q1 Stabilize</h3>
+                <p>Budget, starter emergency fund, high-interest debt, first trip plan.</p>
+              </article>
+              <article>
+                <h3>Q2 Growth</h3>
+                <p>Income growth, consistent investing, weekend trip, health focus.</p>
+              </article>
+              <article>
+                <h3>Q3 Experiences</h3>
+                <p>Main vacation, mid-year financial review, goals reset.</p>
+              </article>
+              <article>
+                <h3>Q4 Future Prep</h3>
+                <p>Taxes, investment review, next-year plan, holiday budget.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="split">
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Big Purchase</p>
+                <h2>House fund</h2>
+              </div>
+              <div class="progress-wrap">
+                <div class="progress-label">
+                  <span>Down payment target</span>
+                  <strong id="houseProgressText">10%</strong>
+                </div>
+                <div class="progress"><span id="houseProgress"></span></div>
+              </div>
+              <p class="guidance" id="houseGuidance"></p>
+            </article>
+
+            <article class="tool-card">
+              <div class="section-title compact">
+                <p class="eyebrow">Monthly Meeting</p>
+                <h2>Couple planning agenda</h2>
+              </div>
+              <div class="checklist">
+                <label><input type="checkbox" /> Review income, spending, savings, and debt</label>
+                <label><input type="checkbox" /> Choose the next trip or date-night plan</label>
+                <label><input type="checkbox" /> Talk through stress levels and quality time</label>
+                <label><input type="checkbox" /> Review career, business, health, and house goals</label>
+                <label><input type="checkbox" /> Decide what needs adjusting next month</label>
+              </div>
+            </article>
+          </section>
+
+          <section class="band goals">
+            <div class="section-title">
+              <p class="eyebrow">Three-Year Direction</p>
+              <h2>Big goals</h2>
+            </div>
+            <textarea id="goals" rows="5">Pay off high-interest debt, build a 3-6 month emergency fund, take one memorable trip each year, grow business revenue, and prepare for a house down payment.</textarea>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
